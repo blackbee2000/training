@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:training/pages/components/header/search_field.dart';
+import 'package:training/pages/common/header/search_field.dart';
 import 'package:training/pages/utils/size_config.dart';
-
 import 'icon_btn_with_counter.dart';
 
 class HeaderSearch extends StatelessWidget {
@@ -20,11 +19,11 @@ class HeaderSearch extends StatelessWidget {
           children: [
             SearchField(),
             IconBtnWithCounter(
-              icon: "asset/icons/ic_filter.png",
+              icon: "asset/icons/ic_filter.svg",
               press: () {},
             ),
             IconBtnWithCounter(
-              icon: "asset/icons/ic_bell.png",
+              icon: "asset/icons/ic_bell.svg",
               numOfitem: 3,
               press: () {},
             ),

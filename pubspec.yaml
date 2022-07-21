@@ -23,6 +23,7 @@ dependencies:
 
   #Utils
   google_fonts: ^2.1.0
+  flutter_svg: ^0.22.0
   json_serializable: ^4.1.4
   intl: ^0.17.0
   flutter_html: ^2.2.1

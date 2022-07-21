@@ -1,6 +1,6 @@
 import 'package:training/pages/apis/api_dio.dart';
 
-import '../models/product/product_response.dart';
+import '../../models/product/product_response.dart';
 
 abstract class HomeApiProtocol {
   getProducts({

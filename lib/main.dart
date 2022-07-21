@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           // Get.put(AuthService());
         },
       ),
-      initialRoute: AppRoutes.HOME,
+      initialRoute: AppRoutes.LOGIN,
       getPages: AppPages.list,
       debugShowCheckedModeBanner: false,
       // translations: LocaleString(),

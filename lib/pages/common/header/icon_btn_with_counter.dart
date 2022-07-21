@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training/pages/utils/app_color.dart';
 import 'package:training/pages/utils/size_config.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IconBtnWithCounter extends StatelessWidget {
   const IconBtnWithCounter({
@@ -30,10 +31,10 @@ class IconBtnWithCounter extends StatelessWidget {
                 color: AppColor.greyLight,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(10)),
-            child: Image.asset(
+            child: SvgPicture.asset(
               icon,
-              width: 32,
-              height: 32,
+              // width: 32,
+              // height: 32,
             ),
           ),
           if (numOfitem != 0)

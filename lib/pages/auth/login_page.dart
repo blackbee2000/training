@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:training/pages/home/home_page.dart';
 import 'package:training/pages/layout/layout_page.dart';
 import 'package:training/pages/utils/app_color.dart';
-import 'package:training/pages/utils/size_config.dart';
 
 import 'login_controller.dart';
 
@@ -19,8 +18,8 @@ class LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.screenWidth,
-      height: SizeConfig.screenHeight,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('asset/images/bg_login.png'),
@@ -123,7 +122,7 @@ class LoginState extends State<LoginPage> {
                             height: 20,
                           ),
                           SizedBox(
-                            width: SizeConfig.screenWidth,
+                            width: MediaQuery.of(context).size.width,
                             height: 55,
                             child: ElevatedButton(
                                 onPressed: () {
