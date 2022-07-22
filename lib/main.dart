@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/instance_manager.dart';
-import 'package:training/pages/utils/size_config.dart';
 import 'package:training/themes/app_theme.dart';
+
 import 'routes/app_pages.dart';
-import 'package:get_storage/get_storage.dart';
 
 void main() async {
   // final storage = new GetStorage();
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
           // Get.put(AuthService());
         },
       ),
-      initialRoute: AppRoutes.LOGIN,
+      initialRoute: AppRoutes.HOME,
       getPages: AppPages.list,
       debugShowCheckedModeBanner: false,
       // translations: LocaleString(),

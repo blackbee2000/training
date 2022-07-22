@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training/pages/home/home_page.dart';
-import 'package:training/pages/layout/layout_page.dart';
-import 'package:training/pages/utils/app_color.dart';
-
-import 'login_controller.dart';
+import 'package:training/controllers/auth/login_controller.dart';
+import 'package:training/pages/common/layout/layout_page.dart';
+import 'package:training/utils/app_color.dart';
 
 class LoginPage extends StatefulWidget {
   @override

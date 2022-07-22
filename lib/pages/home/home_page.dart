@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:training/controllers/home/home_controller.dart';
 import 'package:training/pages/common/header/header_search.dart';
-import 'package:training/pages/home/component/section_title.dart';
-import 'package:training/pages/home/component/specials.dart';
-import 'package:training/pages/models/product/compoments/product_card.dart';
-import 'package:training/pages/utils/size_config.dart';
-
-import 'home_controller.dart';
+import 'package:training/pages/home/components/banner.dart';
+import 'package:training/pages/home/components/categories.dart';
+import 'package:training/pages/home/components/specials.dart';
+import 'package:training/pages/product/components/products.dart';
+import 'package:training/utils/app_constant.dart';
+import 'package:training/utils/size_config.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,70 +29,39 @@ class HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: SizeConfig.screenHeight,
-      child: GetBuilder<HomeController>(
-          builder: (controller) => SafeArea(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    HeaderSearch(),
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    Specials(),
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    SectionTitle(text: "Danh mục 1", press: () {}),
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ...List.generate(
-                              controller.products.length,
-                              (index) => ProductCard(
-                                  product: controller.products[index])),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ...List.generate(
-                              controller.products.length,
-                              (index) => ProductCard(
-                                  product: controller.products[index])),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenWidth(8),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ...List.generate(
-                              controller.products.length,
-                              (index) => ProductCard(
-                                  product: controller.products[index])),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ))),
-    );
+    return Navigator(
+        key: Get.nestedKey(AppConstant.HOME),
+        onGenerateRoute: (settings) => MaterialPageRoute(
+              builder: (_) => Container(
+                height: SizeConfig.screenHeight,
+                child: GetBuilder<HomeController>(
+                    builder: (controller) => SafeArea(
+                            child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: getProportionateScreenWidth(8),
+                              ),
+                              HeaderSearch(),
+                              SizedBox(
+                                height: getProportionateScreenWidth(8),
+                              ),
+                              BannerHome(),
+                              SizedBox(
+                                height: getProportionateScreenWidth(2),
+                              ),
+                              Categories(),
+                              Specials(),
+                              SizedBox(
+                                height: getProportionateScreenWidth(8),
+                              ),
+                              Products(
+                                products: controller.products,
+                              ),
+                            ],
+                          ),
+                        ))),
+              ),
+            ));
   }
 }

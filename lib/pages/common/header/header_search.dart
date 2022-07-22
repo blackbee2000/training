@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training/pages/common/header/search_field.dart';
-import 'package:training/pages/utils/size_config.dart';
+import 'package:training/utils/size_config.dart';
 import 'icon_btn_with_counter.dart';
 
 class HeaderSearch extends StatelessWidget {
