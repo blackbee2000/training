@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:training/controllers/home/layout_binding.dart';
 import 'package:training/pages/auth/login_page.dart';
 import 'package:training/pages/common/layout/layout_page.dart';
-import 'package:training/pages/product/product_detail_page.dart';
 
 class AppPages {
   static var list = [
@@ -25,4 +24,5 @@ class AppRoutes {
   static const String PRODUCT_DETAIL = '/detail';
   static const String CHAT = '/chat';
   static const String PROFILE = '/profile';
+  static const String CART = '/profile';
 }

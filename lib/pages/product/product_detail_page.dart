@@ -1,14 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:training/controllers/home/layout_controller.dart';
 import 'package:training/controllers/product/product_controller.dart';
 import 'package:training/models/product/product.dart';
+import 'package:training/pages/cart/cart_page.dart';
 import 'package:training/pages/common/app_bar/custom_app_bar.dart';
 import 'package:training/pages/common/button/icon_btn.dart';
 import 'package:training/utils/app_color.dart';
+import 'package:training/utils/app_constant.dart';
 import 'package:training/utils/size_config.dart';
-import 'package:expandable_text/expandable_text.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Product product;
@@ -17,12 +20,13 @@ class ProductDetailPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ProductDetailState();
 
-  const ProductDetailPage({Key? key, required this.id, required this.product})
+  const ProductDetailPage({Key? key, required this.product, required this.id})
       : super(key: key);
 }
 
 class ProductDetailState extends State<ProductDetailPage> {
   final productController = Get.put(ProductController());
+  final layoutController = Get.put(LayoutController());
   int selectImage = 0;
   int selectColor = 0;
   bool liked = false;
@@ -39,140 +43,139 @@ class ProductDetailState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onHorizontalDragEnd: (details) => {Get.back(id: widget.id)},
-      child: GetBuilder<ProductController>(
-        builder: (controller) => Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-            child: CustomAppBar(
-              rating: 4.3,
-              id: widget.id,
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
+    return GetBuilder<ProductController>(
+      builder: (controller) => Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+          child: CustomAppBar(
+            id: widget.id,
+            child: Row(
               children: [
-                ProductImages(),
-                TopRoundedContainer(
-                    Colors.white,
-                    Column(
-                      children: [
-                        ProductDescription(context),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          getProportionateScreenWidth(20)),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: getProportionateScreenWidth(40),
-                                        width: getProportionateScreenWidth(40),
-                                        child: ClipOval(
-                                          child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl:
-                                                'https://firebasestorage.googleapis.com/v0/b/fir-react-upload-40723.appspot.com/o/images%2Favt_hieunguyen.jpg?alt=media&token=9a4fdb73-741c-42f5-99d1-e6250b43d2b3',
-                                            useOldImageOnUrlChange: false,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                Container(
-                                              child: Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  value:
-                                                      downloadProgress.progress,
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation(
-                                                          Colors.white),
-                                                  strokeWidth: 2,
-                                                ),
-                                              ),
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Icon(Icons.error),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: getProportionateScreenWidth(5),
-                                      ),
-                                      Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text('Nguyễn Hiếu Hotboy'),
-                                            Text('197CT22222'),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'Khu vực: ',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  'ĐH Văn Lang CS3',
-                                                  style: TextStyle(),
-                                                ),
-                                              ],
-                                            ),
-                                          ])
-                                    ],
-                                  )),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  padding: EdgeInsets.all(
-                                      getProportionateScreenWidth(10)),
-                                  width: getProportionateScreenWidth(64),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFFFFE6E6),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10))),
-                                  child: SvgPicture.asset(
-                                      "asset/icons/ic_chat.svg",
-                                      color: AppColor.dartblue),
-                                ),
-                              ),
-                            ]),
-                        ButtonAddToCart(),
-                        SizedBox(
-                          height: 2,
-                        )
-                      ],
-                    ))
+                Text(
+                  "4.3",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                IconBtn(
+                  icon: Icons.star,
+                  color: Colors.yellow,
+                  backgroundColor: Colors.transparent,
+                  press: () {},
+                ),
               ],
             ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              ProductImages(),
+              TopRoundedContainer(
+                  Colors.white,
+                  Column(
+                    children: [
+                      ProductDescription(context),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      PersonInfo(),
+                      ButtonAddToCart(),
+                      SizedBox(
+                        height: 2,
+                      )
+                    ],
+                  ))
+            ],
           ),
         ),
       ),
     );
   }
 
-  Padding ButtonAddToCart() {
+  Row PersonInfo() {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          child: Row(
+            children: [
+              Container(
+                height: getProportionateScreenWidth(40),
+                width: getProportionateScreenWidth(40),
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://firebasestorage.googleapis.com/v0/b/fir-react-upload-40723.appspot.com/o/images%2Favt_hieunguyen.jpg?alt=media&token=9a4fdb73-741c-42f5-99d1-e6250b43d2b3',
+                    useOldImageOnUrlChange: false,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Container(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Icon(Icons.error),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: getProportionateScreenWidth(5),
+              ),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Nguyễn Hiếu Hotboy'),
+                Text('197CT22222'),
+                Row(
+                  children: [
+                    Text(
+                      'Khu vực: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'ĐH Văn Lang CS3',
+                      style: TextStyle(),
+                    ),
+                  ],
+                ),
+              ])
+            ],
+          )),
+      GestureDetector(
+        onTap: () {},
+        child: Container(
+          padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+          width: getProportionateScreenWidth(64),
+          decoration: BoxDecoration(
+              color: Color(0xFFFFE6E6),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10))),
+          child: SvgPicture.asset("asset/icons/ic_chat.svg",
+              color: AppColor.dartblue),
+        ),
+      ),
+    ]);
+  }
+
+  Widget ButtonAddToCart() {
     return Padding(
       padding: EdgeInsets.only(
         left: SizeConfig.screenWidth * 0.15,
         right: SizeConfig.screenWidth * 0.15,
         top: getProportionateScreenWidth(15),
-        // bottom: getProportionateScreenWidth(40),
       ),
       child: SizedBox(
         height: getProportionateScreenWidth(36),
@@ -182,7 +185,11 @@ class ProductDetailState extends State<ProductDetailPage> {
               style: TextStyle(fontSize: 16),
             ),
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () async {
+              layoutController.tabIndex.value = AppConstant.CART;
+              layoutController.update();
+              Get.to(CartPage(), id: AppConstant.HOME);
+            },
             style: ElevatedButton.styleFrom(
               primary: AppColor.primary,
               onPrimary: Colors.white,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:training/pages/common/button/icon_btn.dart';
+import 'package:training/utils/app_constant.dart';
 import 'package:training/utils/size_config.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final double rating;
   final int id;
+  final Widget child;
 
-  CustomAppBar({required this.rating, required this.id});
+  CustomAppBar({required this.id, required Widget this.child});
 
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
@@ -28,6 +29,7 @@ class CustomAppBar extends StatelessWidget {
                 icon: Icons.arrow_back_ios_new_rounded,
                 backgroundColor: Colors.white,
                 press: () {
+                  print("CustomAppBar");
                   Get.back(id: id);
                 },
               ),
@@ -39,26 +41,7 @@ class CustomAppBar extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: Row(
-                children: [
-                  Text(
-                    "$rating",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  IconBtn(
-                    icon: Icons.star,
-                    color: Colors.yellow,
-                    backgroundColor: Colors.transparent,
-                    press: () {
-                      Get.back(id: id);
-                    },
-                  ),
-                ],
-              ),
+              child: child,
             )
           ],
         ),

@@ -24,12 +24,12 @@ class ProductCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: getProportionateScreenWidth(20)),
       child: GestureDetector(
-        onTap: () {
+        onTap: () async {
           Get.to(
-              () => ProductDetailPage(
-                    product: product,
-                    id: AppConstant.HOME,
-                  ),
+              ProductDetailPage(
+                product: product,
+                id: AppConstant.HOME,
+              ),
               id: AppConstant.HOME);
         },
         child: SizedBox(
